@@ -179,15 +179,21 @@ def main(args):
     with open(os.path.join(args.data_path, 'entities.dict')) as fin:
         entity2id = dict()
         for line in fin:
-            eid, entity = line.strip().split('\t')
+            if args.data_path == "data/CodexS":
+                eid, entity = line.strip().split("'")
+            else:
+                eid, entity = line.strip().split("\t")
             entity2id[entity] = int(eid)
 
     with open(os.path.join(args.data_path, 'relations.dict')) as fin:
         relation2id = dict()
         for line in fin:
-            rid, relation = line.strip().split('\t')
+            if args.data_path == "data/CodexS":
+                rid, relation = line.strip().split("'")
+            else:
+                rid, relation = line.strip().split("\t")
             relation2id[relation] = int(rid)
-    
+  
     # Read regions for Countries S* datasets
     if args.countries:
         regions = list()
